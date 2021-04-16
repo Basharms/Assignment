@@ -1,0 +1,82 @@
+package assignment.filters;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Servlet Filter implementation class AuthenticationFilter
+ */
+@WebFilter("/*")
+public class AuthenticationFilter implements Filter {
+
+	protected List<String> execludeURLs;
+	
+    /**
+     * Default constructor. 
+     */
+    public AuthenticationFilter() {
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see Filter#destroy()
+	 */
+	public void destroy() {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+	 */
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		
+		// place your code here
+		HttpServletRequest req = (HttpServletRequest) request;
+		System.out.println("AuthenticationFilter.doFilter()");
+		HttpSession session = req.getSession();
+		
+		try {
+			
+			System.out.println(req.getServletPath());
+			if ("/login".equals(req.getServletPath()) || "/login.jsp".equals(req.getServletPath())) {
+				
+			}
+			if (session.isNew() || session.getAttribute("loggedInUser") == null) {
+				throw new Exception();
+			}
+		} catch (Exception e) {
+			session.invalidate();
+			
+			// Session has been timed out
+			List<String> errorsList = new ArrayList<String>();
+			errorsList.add("No session. Please log in again");
+			req.getSession().setAttribute("ErrorList", errorsList);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+		// pass the request along the filter chain
+		chain.doFilter(request, response);
+	}
+
+	/**
+	 * @see Filter#init(FilterConfig)
+	 */
+	public void init(FilterConfig fConfig) throws ServletException {
+		
+	}
+
+}

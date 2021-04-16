@@ -1,0 +1,68 @@
+package assignment.util;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		List<Integer> a = new ArrayList<Integer>();
+		List<Integer> b = new ArrayList<Integer>();
+		
+		a.add(5);
+		a.add(6);
+		a.add(7);
+		
+		b.add(3);
+		b.add(6);
+		b.add(10);
+		List<Integer> result = compareTriplets(a, b);
+		
+		result.forEach(r -> System.out.println(r));
+	}
+	
+	public static int diagonalDifference(List<List<Integer>> arr) {
+		int dd = 0;
+		System.out.println(arr.size());
+		for(int i = 0; i < arr.size()) {
+			
+		}
+		
+	}
+	
+	
+	static long aVeryBigSum(long[] ar) {
+        long sum = 0l;
+        for(int i = 0; i < ar.length; i++) {
+            sum += ar[i];
+        }
+        
+        return sum;
+
+    }
+	static List<Integer> compareTriplets(List<Integer> a, List<Integer> b) {
+		List<Integer> score = new ArrayList<Integer>();
+		int aliceScore = 0;
+		int bobScore = 0;
+		
+		for(int i = 0; i < 3; i++) {
+			if(a.get(i) > b.get(i)) {
+				aliceScore++;
+			} else if(a.get(i) < b.get(i)) {
+				bobScore++;
+			}
+		}
+		
+		score.add(0, aliceScore);
+		score.add(1, bobScore);
+		
+		return score;
+	}
+
+}

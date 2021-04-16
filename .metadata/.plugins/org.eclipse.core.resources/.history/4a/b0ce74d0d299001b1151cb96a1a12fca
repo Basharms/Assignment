@@ -1,0 +1,44 @@
+package assignment.util;
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+	
+	// Complete the bigSorting function below.
+   
+	public static void main(String[] args) {
+
+		 System.out.println(approximatePI(1000));
+
+	}
+	
+	public static double approximatePI(int number) {
+		
+//		double pi = 0;
+//		for(double i = 2; i < number; i++) {
+//			pi += 1 - (1 / (2 * i - 1));
+//		}
+//		
+//		return pi;
+		
+		double pi = 0;
+		for (int i = 1; i < n; i++) {
+			pi += Math.pow(-1,i+1) / (2*i - 1);
+		} 
+		return 4 * pi;
+    }
+	
+	public static List<Integer> generateBinaries(int number) {
+
+        if(number == 1) {
+        	
+        }
+        return null;
+    }
+		
+}

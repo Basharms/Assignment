@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package assignment.filters;
+
+/**
+ * @author Administrator
+ *
+ */
+public class AuthenticationFilter {
+
+}

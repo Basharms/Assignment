@@ -1,0 +1,33 @@
+/**
+ * 
+ */
+package assignment.service;
+
+import org.apache.log4j.Logger;
+
+import assignment.dao.AssignmentDAO;
+import assignment.entity.User;
+
+/**
+ * @author Administrator
+ *
+ */
+public class AssignmentService {
+	
+	AssignmentDAO dao = new AssignmentDAO();
+	Logger logger = Logger.getLogger(AssignmentService.class);
+	
+	public boolean authenticate(String userName, String password) {
+		
+		boolean isUserAuthenticated = false;
+		User user = dao.getUserByCredentials(userName, password);
+		logger.info(user.toString());
+		if(user != null) {
+			
+			isUserAuthenticated = true;
+		}
+		
+		return isUserAuthenticated;
+	}
+
+}

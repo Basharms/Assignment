@@ -1,0 +1,32 @@
+package assignment.util;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	static List<Integer> compareTriplets(List<Integer> a, List<Integer> b) {
+		List<Integer> score = new ArrayList<Integer>();
+		int aliceScore = 0;
+		int bobScore = 0;
+		
+		for(int i = 0; i < 3; i++) {
+			if(a.get(i) > b.get(i)) {
+				aliceScore++;
+			} else if(a.get(i) < b.get(i)) {
+				bobScore++;
+			}
+		}
+		
+		score.add(0, aliceScore);
+		score.add(1, bobScore);
+		
+		return score;
+	}
+
+}
