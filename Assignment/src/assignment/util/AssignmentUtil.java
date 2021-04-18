@@ -22,16 +22,6 @@ public class AssignmentUtil {
 
 	private static SessionFactory sessionFactory;
 
-	public static void main(String[] args) {
-		try {
-			Calendar cc = stringToCalendar("01/12/2012");
-			System.out.println(cc.getTime());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
 	public static Calendar stringToCalendar(final String dateTime) throws ParseException {
         Calendar calendar = Calendar.getInstance();
         String format = "dd/MM/yyyy";

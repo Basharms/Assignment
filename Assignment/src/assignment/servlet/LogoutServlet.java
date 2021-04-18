@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import assignment.entity.User;
+import assignment.filters.AuthenticationFilter;
 import assignment.service.AssignmentService;
 
 /**
@@ -18,9 +21,15 @@ import assignment.service.AssignmentService;
  */
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
        
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	Logger logger = Logger.getLogger(LogoutServlet.class);
+
+	/**
      * @see HttpServlet#HttpServlet()
      */
     public LogoutServlet() {
@@ -32,7 +41,7 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("LogoutServlet.doGet()");
+		logger.info("LogoutServlet.doGet()");
 		try {
 			User loggdInUser = (User) request.getSession().getAttribute("loggedInUser");
 			
@@ -70,7 +79,7 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("LogoutServlet.doPost()");
+		logger.info("LogoutServlet.doPost()");
 	}
 
 }

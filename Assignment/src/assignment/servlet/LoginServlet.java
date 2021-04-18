@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
+import assignment.dao.AssignmentDAO;
 import assignment.entity.User;
 import assignment.service.AssignmentService;
 
@@ -22,20 +25,20 @@ import assignment.service.AssignmentService;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	Logger logger = Logger.getLogger(LoginServlet.class);
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public LoginServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
     
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("LoginServlet.doGet()");
+		logger.info("LoginServlet.doGet()");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -51,10 +54,9 @@ public class LoginServlet extends HttpServlet {
 			AssignmentService service = new AssignmentService();
 			
 			User user =	service.getUserByCredentials(userName, password);
-			
 			if(user != null) {
 				if(user.getLogoutTime() == null && user.getLastLoginTime() != null) {
-					System.out.println("Failed .. user already loggedin");
+					logger.info("Failed .. user already loggedin");
 					// This attribute to determine showing error message or not
 					request.setAttribute("showMsg", "true");
 					request.setAttribute("errorMsg", "User already loggedin");
@@ -69,7 +71,7 @@ public class LoginServlet extends HttpServlet {
 				service.updateUser(user);
 				request.getSession().setAttribute("loggedInUser", user);
 				
-				System.out.println("Success");
+				logger.info("Success");
 				// In case the user is authenticated then load all employees to be loaded in the welcome page
 				request.setAttribute("userName", userName);
 				request.removeAttribute("showMsg");
@@ -82,7 +84,7 @@ public class LoginServlet extends HttpServlet {
 				
 				return;
 			} else {
-				System.out.println("Failed .. user not found for user name :: " + userName + " and passsword :: " + password);
+				logger.info("Failed .. user not found for user name :: " + userName + " and passsword :: " + password);
 				
 				// This attribute to determine showing error message or not
 				request.setAttribute("showMsg", "true");

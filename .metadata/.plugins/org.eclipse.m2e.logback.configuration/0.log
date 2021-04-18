@@ -14,3 +14,8 @@
 2021-04-09 13:46:41,772 [Worker-164: Downloading sources for commons-lang3-3.8.1.jar] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1-sources.jar
 2021-04-09 13:46:42,207 [Worker-164: Downloading sources for commons-lang3-3.8.1.jar] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1-sources.jar
 2021-04-10 09:59:28,116 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2021-04-16 10:18:26,090 [Worker-44: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2021-04-18 21:41:24,422 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2021-04-18 21:41:36,913 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Updating Gradle version information cache failed. Using outdated cache.
+2021-04-18 22:07:44,569 [Worker-46: Downloading sources for log4j.jar] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/log4j/log4j/1.2.14/log4j-1.2.14-sources.jar
+2021-04-18 22:07:45,055 [Worker-46: Downloading sources for log4j.jar] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/log4j/log4j/1.2.14/log4j-1.2.14-sources.jar

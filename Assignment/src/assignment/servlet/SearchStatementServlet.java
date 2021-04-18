@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import assignment.entity.Statement;
 import assignment.entity.User;
 import assignment.service.AssignmentService;
@@ -22,6 +24,8 @@ import assignment.service.SearchStatementCriteria;
  */
 @WebServlet("/searchStatement")
 public class SearchStatementServlet extends HttpServlet {
+	
+	Logger logger = Logger.getLogger(SearchStatementServlet.class);
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -36,7 +40,7 @@ public class SearchStatementServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("SearchStatementServlet.doGet()");
+		logger.info("SearchStatementServlet.doGet()");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -45,7 +49,7 @@ public class SearchStatementServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("SearchStatementServlet.doPost()");
+		logger.info("SearchStatementServlet.doPost()");
 		List<Statement> searchResult = null;
 		AssignmentService service = new AssignmentService();
 		
@@ -54,7 +58,7 @@ public class SearchStatementServlet extends HttpServlet {
 			response.setContentType("text/html;charset=UTF-8");
 	        PrintWriter out = response.getWriter();
 	        Cookie[] cks = request.getCookies();
-			System.out.println("Welcome ::: "+ cks[0].getValue());
+			logger.info("Welcome ::: "+ cks[0].getValue());
 			
 			String amountFrom = request.getParameter("amountFrom");
 			String amountTo = request.getParameter("amountTo");
@@ -70,7 +74,7 @@ public class SearchStatementServlet extends HttpServlet {
 						(dateFrom != null && dateFrom.trim().length() > 0) ||
 						(dateTo != null && dateTo.trim().length() > 0)) {
 						
-						System.out.println("Unauthorized User ...");
+						logger.info("Unauthorized User ...");
 						// The below commented out lines will redirect to error401.jsp page
 //						response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 //						response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized User ... This user couldn't specify any parameter to search");
@@ -94,12 +98,12 @@ public class SearchStatementServlet extends HttpServlet {
 			searchResult = service.searchStatementByCriteria(searchStatementCriteria);
 
 
-			System.out.println("searchResult.size() :: " + searchResult.size());
+			logger.info("searchResult.size() :: " + searchResult.size());
 
 			request.removeAttribute("showMsg");
 			request.setAttribute("searchResult", searchResult);
 
-			searchResult.forEach((p) -> System.out.println(p.toString()) );
+			searchResult.forEach((p) -> logger.info(p.toString()) );
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("searchStatementResult.jsp");
 			dispatcher.forward(request, response);

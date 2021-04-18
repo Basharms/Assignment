@@ -10,7 +10,10 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
+import org.apache.log4j.Logger;
+
 import assignment.entity.User;
+import assignment.filters.AuthenticationFilter;
 import assignment.service.AssignmentService;
 
 /**
@@ -20,6 +23,7 @@ import assignment.service.AssignmentService;
 @WebListener
 public class AssignmentSessionListener implements HttpSessionListener {
 
+	Logger logger = Logger.getLogger(AssignmentSessionListener.class);
     /**
      * Default constructor. 
      */
@@ -31,14 +35,14 @@ public class AssignmentSessionListener implements HttpSessionListener {
      * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
      */
     public void sessionCreated(HttpSessionEvent se)  { 
-    	System.out.println("-- HttpSessionListener#sessionCreated invoked --");
+    	logger.info("-- HttpSessionListener#sessionCreated invoked --");
     }
 
 	/**
      * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
      */
     public void sessionDestroyed(HttpSessionEvent se)  { 
-         System.out.println("AssignmentSessionListener.sessionDestroyed()..");
+         logger.info("AssignmentSessionListener.sessionDestroyed()..");
          
          try {
  			User loggdInUser = (User) se.getSession().getAttribute("loggedInUser");

@@ -30,16 +30,16 @@ public class AssignmentDAO {
 		Session session = AssignmentUtil.initHibernateSession();
 		List<Statement> statementList = null;
 		try {
-			System.out.println("AssignmentDAO.getStatementsList()");
+			logger.info("AssignmentDAO.getStatementsList()");
 			Criteria criteria = session.createCriteria(Statement.class);
 			String accoutId = String.valueOf(searchCriteria.getAccountId());
 			criteria.add(Restrictions.eq("accountId", accoutId));
-			System.out.println("Search criteria :: " + searchCriteria.toString());
+			logger.info("Search criteria :: " + searchCriteria.toString());
 			boolean serachCriteriaSpecfied = false;
 			if((searchCriteria.getAmountFrom() != null && searchCriteria.getAmountFrom().trim().length() > 0) 
 					&& (searchCriteria.getAmountTo() != null && searchCriteria.getAmountTo().trim().length() > 0)) {
 				serachCriteriaSpecfied = true;
-				System.out.println("ADD amount range to criteria");
+				logger.info("ADD amount range to criteria");
 				
 				double amountFrom = Double.parseDouble(searchCriteria.getAmountFrom());
 				double amountTo = Double.parseDouble(searchCriteria.getAmountTo());
@@ -50,7 +50,7 @@ public class AssignmentDAO {
 					(searchCriteria.getDateTo() != null && searchCriteria.getDateTo().trim().length() > 0)) {
 				
 				serachCriteriaSpecfied = true;
-				System.out.println("ADD date range to criteria");
+				logger.info("ADD date range to criteria");
 				
 		        String dateFrom = searchCriteria.getDateFrom();
 		        String dateTo = searchCriteria.getDateTo();
@@ -58,18 +58,18 @@ public class AssignmentDAO {
 		        Calendar calFrom = AssignmentUtil.stringToCalendar(dateFrom);
 		        Calendar calTo = AssignmentUtil.stringToCalendar(dateTo);
 		        
-		        System.out.println("calFrom.getTime() :: " + calFrom.getTime());
-		        System.out.println("calTo.getTime() :: " + calTo.getTime());
+		        logger.info("calFrom.getTime() :: " + calFrom.getTime());
+		        logger.info("calTo.getTime() :: " + calTo.getTime());
 				criteria.add(Restrictions.ge("dateField", calFrom));
 				criteria.add(Restrictions.le("dateField", calTo));
 			}
 			
 			if(! serachCriteriaSpecfied) {
-				System.out.println("No search Criteria specified");
+				logger.info("No search Criteria specified");
 				
 				Calendar cal = Calendar.getInstance();
 				cal.add(Calendar.MONTH, -3);
-				System.out.println(cal.getTime());
+				logger.info(cal.getTime());
 				
 				
 				criteria.add(Restrictions.ge("dateField", cal));
@@ -91,15 +91,13 @@ public class AssignmentDAO {
 	}
 	public void updateUser(User user) {
 		
-		System.out.println("AssignmentDAO.updateUser()");
+		logger.info("AssignmentDAO.updateUser()");
 		try {
 			Session session = AssignmentUtil.initHibernateSession();
 			session.saveOrUpdate(user);
 			
 			Transaction tx = session.beginTransaction();
 			tx.commit();
-			
-//			session.flush();
 			
 		} catch (HibernateException e) {
 			logger.error((new StringBuffer("An error occured while updating User object with userName :")
@@ -117,13 +115,6 @@ public class AssignmentDAO {
 		Session session = AssignmentUtil.initHibernateSession();
 		User bean = null;
 		try {
-			
-			// Create CriteriaBuilder
-//			CriteriaBuilder builder = session.getCriteriaBuilder();
-
-			// Create CriteriaQuery
-//			CriteriaQuery<User> criteria = builder.createQuery(User.class);
-			
 			bean = (User) session.createCriteria(User.class)
 					.add(Restrictions.eq("userName", userName))
 					.add(Restrictions.eq("password", password))

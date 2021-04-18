@@ -41,3 +41,12 @@
 127.0.0.1 - - [16/Apr/2021:12:46:54 +0300] "GET /Assignment/searchStatement HTTP/1.1" 200 1039
 127.0.0.1 - - [16/Apr/2021:12:46:54 +0300] "GET /Assignment/js/jquery-1.10.2.min.js HTTP/1.1" 404 739
 127.0.0.1 - - [16/Apr/2021:12:46:54 +0300] "GET /favicon.ico HTTP/1.1" 404 759
+127.0.0.1 - - [16/Apr/2021:12:48:52 +0300] "GET / HTTP/1.1" 404 748
+127.0.0.1 - - [16/Apr/2021:12:49:01 +0300] "GET /Assignment/searchStatement?btn=Back+to+Search HTTP/1.1" 200 1039
+127.0.0.1 - - [16/Apr/2021:12:49:12 +0300] "POST /Assignment/login HTTP/1.1" 200 3985
+127.0.0.1 - - [16/Apr/2021:12:49:20 +0300] "POST /Assignment/searchStatement HTTP/1.1" 200 1643
+127.0.0.1 - - [16/Apr/2021:12:49:36 +0300] "GET /Assignment/searchStatement HTTP/1.1" 200 1039
+127.0.0.1 - - [16/Apr/2021:12:49:36 +0300] "GET /Assignment/js/jquery-1.10.2.min.js HTTP/1.1" 404 739
+127.0.0.1 - - [16/Apr/2021:12:49:36 +0300] "GET /favicon.ico HTTP/1.1" 404 759
+127.0.0.1 - - [16/Apr/2021:12:50:30 +0300] "GET /Assignment/searchStatement?btn=Back+to+Search HTTP/1.1" 200 1039
+127.0.0.1 - - [16/Apr/2021:12:51:14 +0300] "GET /Assignment/login.jsp HTTP/1.1" 200 1039

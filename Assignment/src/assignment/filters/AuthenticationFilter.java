@@ -1,7 +1,6 @@
 package assignment.filters;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,13 +13,15 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 /**
  * Servlet Filter implementation class AuthenticationFilter
  */
 @WebFilter("/*")
 public class AuthenticationFilter implements Filter {
 
-	protected List<String> execludeURLs;
+	Logger logger = Logger.getLogger(AuthenticationFilter.class);
 	
     /**
      * Default constructor. 
@@ -43,12 +44,12 @@ public class AuthenticationFilter implements Filter {
 		
 		// place your code here
 		HttpServletRequest req = (HttpServletRequest) request;
-		System.out.println("AuthenticationFilter.doFilter()");
+		logger.info("AuthenticationFilter.doFilter()");
 		HttpSession session = req.getSession();
 		
 		try {
 			
-			System.out.println("req.getServletPath() :: " + req.getServletPath());
+			logger.info("req.getServletPath() :: " + req.getServletPath());
 			// exclude login from filter 
 			if (! ("/login".equals(req.getServletPath()) || "/login.jsp".equals(req.getServletPath()))) {
 				// check if the session is new and check logged in user attribute if exist.
@@ -59,11 +60,12 @@ public class AuthenticationFilter implements Filter {
 			
 		} catch (Exception e) {
 			session.invalidate();
-			System.out.println("No session. Please log in again");
+			logger.info("No session. Please log in again");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
+		
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
